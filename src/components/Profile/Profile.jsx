@@ -1,65 +1,67 @@
-// src/components/Signup.js
+// src/components/Profile.js
 import React, { useState } from 'react';
 
-const Signup = ({ onSignup }) => {
-    const [userDetails, setUserDetails] = useState({
-        username: '',
-        password: '',
-        isAdmin: false,
+const Profile = () => {
+    const [profile, setProfile] = useState({
+        name: 'John Doe',
+        address: '123 Main Street, City, Country',
+        phone: '9876543210',
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setUserDetails({
-            ...userDetails,
+        setProfile({
+            ...profile,
             [name]: value,
         });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSignup(userDetails); // Send user details to the parent component
+        alert('Profile updated successfully!');
     };
 
     return (
         <div style={styles.container}>
-            <h1 style={styles.heading}>Signup</h1>
+            <h1 style={styles.heading}>Profile</h1>
             <form onSubmit={handleSubmit} style={styles.form}>
                 <div style={styles.formGroup}>
-                    <label htmlFor="username" style={styles.label}>Username</label>
+                    <label htmlFor="name" style={styles.label}>Name</label>
                     <input
                         type="text"
-                        id="username"
-                        name="username"
-                        value={userDetails.username}
+                        id="name"
+                        name="name"
+                        value={profile.name}
                         onChange={handleChange}
                         style={styles.input}
                         required
                     />
                 </div>
                 <div style={styles.formGroup}>
-                    <label htmlFor="password" style={styles.label}>Password</label>
+                    <label htmlFor="address" style={styles.label}>Address</label>
                     <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={userDetails.password}
+                        type="text"
+                        id="address"
+                        name="address"
+                        value={profile.address}
                         onChange={handleChange}
                         style={styles.input}
                         required
                     />
                 </div>
                 <div style={styles.formGroup}>
-                    <label htmlFor="isAdmin" style={styles.label}>Admin (for admin signup)</label>
+                    <label htmlFor="phone" style={styles.label}>Phone</label>
                     <input
-                        type="checkbox"
-                        id="isAdmin"
-                        name="isAdmin"
-                        checked={userDetails.isAdmin}
-                        onChange={(e) => setUserDetails({ ...userDetails, isAdmin: e.target.checked })}
+                        type="text"
+                        id="phone"
+                        name="phone"
+                        value={profile.phone}
+                        onChange={handleChange}
+                        style={styles.input}
+                        required
                     />
                 </div>
-                <button type="submit" style={styles.button}>Signup</button>
+                <button type="submit" style={styles.button}>Update Profile</button>
             </form>
         </div>
     );
@@ -100,4 +102,4 @@ const styles = {
     },
 };
 
-export default Signup;
+export default Profile;

@@ -2,23 +2,19 @@
 import React, { useState } from 'react';
 
 const Login = ({ onLogin }) => {
-    const [credentials, setCredentials] = useState({
-        username: '',
-        password: '',
-    });
+    const [credentials, setCredentials] = useState({ username: '', password: '' });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setCredentials((prevCreds) => ({
-            ...prevCreds,
+        setCredentials({
+            ...credentials,
             [name]: value,
-        }));
+        });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Placeholder logic for login validation
-        onLogin(credentials);
+        onLogin(credentials); // Send login credentials to parent component
     };
 
     return (
@@ -58,11 +54,9 @@ const Login = ({ onLogin }) => {
 const styles = {
     container: {
         padding: '2rem',
-        maxWidth: '400px',
-        margin: '0 auto',
     },
     heading: {
-        fontSize: '1.8rem',
+        fontSize: '2rem',
         marginBottom: '1rem',
     },
     form: {

@@ -14,8 +14,11 @@ const Navbar = () => {
                 <Link to="/add-product" style={styles.link}>Add Product</Link>
                 <Link to="/cart" style={styles.link}>Cart</Link>
                 <Link to="/checkout" style={styles.link}>Checkout</Link>
+                <Link to="/order-history" style={styles.link}>Order History</Link>
+                <Link to="/profile" style={styles.link}>Profile</Link>
                 <Link to="/signup" style={styles.link}>Signup</Link>
                 <Link to="/login" style={styles.link}>Login</Link>
+                <Link to="/admin-dashboard" style={styles.link}>Admin Dashboard</Link>
             </div >
         </nav >
     );
