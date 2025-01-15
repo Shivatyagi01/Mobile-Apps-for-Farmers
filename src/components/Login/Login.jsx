@@ -1,89 +1,57 @@
-// src/components/Login.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({ onLogin }) => {
-    const [credentials, setCredentials] = useState({ username: '', password: '' });
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setCredentials({
-            ...credentials,
-            [name]: value,
-        });
-    };
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onLogin(credentials); // Send login credentials to parent component
+
+        // Mock authentication
+        if (email === 'user@example.com' && password === 'password') {
+            onLogin({ email });
+            navigate('/');
+        } else {
+            setError('Invalid email or password');
+        }
     };
 
     return (
-        <div style={styles.container}>
-            <h1 style={styles.heading}>Login</h1>
-            <form onSubmit={handleSubmit} style={styles.form}>
-                <div style={styles.formGroup}>
-                    <label htmlFor="username" style={styles.label}>Username</label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        value={credentials.username}
-                        onChange={handleChange}
-                        style={styles.input}
-                        required
-                    />
-                </div>
-                <div style={styles.formGroup}>
-                    <label htmlFor="password" style={styles.label}>Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={credentials.password}
-                        onChange={handleChange}
-                        style={styles.input}
-                        required
-                    />
-                </div>
-                <button type="submit" style={styles.button}>Login</button>
-            </form>
+        <div className="d-flex justify-content-center align-items-center" style={{ height: '80vh' }}>
+            <div className="card p-4 shadow" style={{ width: '400px' }}>
+                <h3 className="text-center mb-4">Login</h3>
+                {error && <div className="alert alert-danger">{error}</div>}
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-3">
+                        <label htmlFor="email" className="form-label">Email</label>
+                        <input
+                            type="email"
+                            className="form-control"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="password" className="form-label">Password</label>
+                        <input
+                            type="password"
+                            className="form-control"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button type="submit" className="btn btn-primary w-100">Login</button>
+                </form>
+            </div>
         </div>
     );
-};
-
-const styles = {
-    container: {
-        padding: '2rem',
-    },
-    heading: {
-        fontSize: '2rem',
-        marginBottom: '1rem',
-    },
-    form: {
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    formGroup: {
-        marginBottom: '1rem',
-    },
-    label: {
-        marginBottom: '0.5rem',
-        fontWeight: 'bold',
-    },
-    input: {
-        padding: '0.5rem',
-        border: '1px solid #ccc',
-        borderRadius: '4px',
-        width: '100%',
-    },
-    button: {
-        padding: '0.7rem',
-        backgroundColor: '#4CAF50',
-        color: 'white',
-        border: 'none',
-        borderRadius: '5px',
-        cursor: 'pointer',
-    },
 };
 
 export default Login;

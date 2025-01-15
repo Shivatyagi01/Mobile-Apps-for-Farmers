@@ -1,50 +1,33 @@
-// src/components/Navbar.js
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
     return (
-        <nav style={styles.navbar}>
-            <div style={styles.brand}>
-                <Link to="/" style={styles.link}>Farmer Market</Link>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <div className="container">
+                <Link className="navbar-brand" to="/">Logo</Link>
+                <div className="collapse navbar-collapse">
+                    <ul className="navbar-nav mx-auto">
+                        <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
+                        <li className="nav-item"><Link className="nav-link" to="/products">Products</Link></li>
+                        {user && <li className="nav-item"><Link className="nav-link" to="/profile">Profile</Link></li>}
+                    </ul>
+                    <ul className="navbar-nav ms-auto">
+                        {user ? (
+                            <li className="nav-item">
+                                <button className="btn btn-link nav-link" onClick={() => setUser(null)}>Logout</button>
+                            </li>
+                        ) : (
+                            <>
+                                <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
+                                <li className="nav-item"><Link className="nav-link" to="/register">Signup</Link></li>
+                            </>
+                        )}
+                    </ul>
+                </div>
             </div>
-            <div style={styles.navLinks}>
-                <Link to="/" style={styles.link}>Home</Link>
-                <Link to="/products" style={styles.link}>Products</Link>
-                <Link to="/add-product" style={styles.link}>Add Product</Link>
-                <Link to="/cart" style={styles.link}>Cart</Link>
-                <Link to="/checkout" style={styles.link}>Checkout</Link>
-                <Link to="/order-history" style={styles.link}>Order History</Link>
-                <Link to="/profile" style={styles.link}>Profile</Link>
-                <Link to="/signup" style={styles.link}>Signup</Link>
-                <Link to="/login" style={styles.link}>Login</Link>
-                <Link to="/admin-dashboard" style={styles.link}>Admin Dashboard</Link>
-            </div >
-        </nav >
+        </nav>
     );
-};
-
-const styles = {
-    navbar: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        padding: '1rem',
-        backgroundColor: '#4CAF50',
-        color: 'white'
-    },
-    brand: {
-        fontWeight: 'bold',
-        fontSize: '1.5rem'
-    },
-    navLinks: {
-        display: 'flex',
-        gap: '1rem'
-    },
-    link: {
-        color: 'white',
-        textDecoration: 'none',
-        fontWeight: '500'
-    }
 };
 
 export default Navbar;
